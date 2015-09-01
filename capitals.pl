@@ -15,17 +15,16 @@ hypothesize(reykjavik)     :- reykjavik, !.
 hypothesize(helsinki)     :- helsinki, !.
 hypothesize(copenhagen)     :- copenhagen, !.
 hypothesize(oslo)     :- oslo, !.
-
+hypothesize(amsterdam)     :- amsterdam, !.
+hypothesize(athens)     :- athens, !.
+hypothesize(berlin)     :- berlin, !.
+hypothesize(brussel)     :- brussel, !.
 /* Not yet implemented
 
-hypothesize(amsterdam)     :- amsterdam, !.
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
-hypothesize(athens)     :- athens, !.
 hypothesize(belgrade)     :- belgrade, !.
-hypothesize(berlin)     :- berlin, !.
 hypothesize(bern)     :- bern, !.
 hypothesize(bratislava)     :- bratislava, !.
-hypothesize(brussel)     :- brussel, !.
 hypothesize(bucharest)     :- bucharest, !.
 hypothesize(budapest)     :- budapest, !.
 hypothesize(chisinau)     :- chisinau, !.
@@ -62,25 +61,35 @@ hypothesize(zagreb)     :- zagreb, !.
 hypothesize(unknown).             /* no diagnosis */
 
 /* capital identification rules */
-stockholm :- verify(have_hosted_the_olympics_(summergames)),
+stockholm :- verify(is_part_of_scandinavia),
+             verify(have_hosted_the_olympics_(summergames)),
+             disprove(have_hosted_the_olympics_(vintergames)),
              population_exceeds_1_million,
-             verify(is_part_of_scandinavia),
-             verify(flag_colours_include_yellow_and_blue).
+             verify(capital_of_country_where_snus_originated).
 
-copenhagen :- disprove(have_hosted_the_olympics_(summergames)),
+copenhagen :- verify(is_part_of_scandinavia),
+              disprove(have_hosted_the_olympics_(summergames)),
+              disprove(have_hosted_the_olympics_(vintergames)),
               population_exceeds_1_million,
-              verify(is_part_of_scandinavia),
-              verify(flag_colours_include_red_and_white).
+              verify(hometown_of_Niels_Bohr).
 
-helsinki :- verify(have_hosted_the_olympics_(summergames)),
+helsinki :- verify(is_part_of_scandinavia),
+            verify(have_hosted_the_olympics_(summergames)),
+            disprove(have_hosted_the_olympics_(vintergames)),
             population_under_1_million,
-            verify(is_part_of_scandinavia),
-            verify(flag_colours_include_blue_and_white).
+            verify(hometown_of_linux).
 
-reykjavik :- disprove(have_hosted_the_olympics_(summergames)),
+reykjavik :- verify(is_part_of_scandinavia),
+             disprove(have_hosted_the_olympics_(summergames)),
              population_under_half_a_million,
-             verify(is_part_of_scandinavia),
              verify(the_northernmost_town_in_the_world).
+
+oslo :- verify(is_part_of_scandinavia), 
+        disprove(have_hosted_the_olympics_(summergames)),
+        verify(have_hosted_the_olympics_(vintergames)),
+        population_exceeds_1_million.
+
+        
 
 /* classification rules */
 
@@ -96,6 +105,11 @@ population_exceeds_1_million :-
     disprove(population_under_half_a_million),
     verify(population_exceeds_1_million).
 
+have_hosted_the_very_first_olympics:-
+    verify(have_hosted_the_very_first_olympics),
+    assert(yes(have_hosted_the_olympics_(summergames)).
+    
+
 /* how to ask questions */
 ask(Question) :-
     write('Is this true for the capital: '),
@@ -106,7 +120,7 @@ ask(Question) :-
     ( (Response == yes ; Response == y)
       ->
        assert(yes(Question)) ;
-      (Respone == no ; Response == n)
+      (Response == no ; Response == n)
       ->
           (assert(no(Question)), fail);
       fail).
