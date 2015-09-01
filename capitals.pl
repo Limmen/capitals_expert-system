@@ -97,8 +97,19 @@ amsterdam :- disprove(is_part_of_scandinavia),
 
 athens :- disprove(is_part_of_scandinavia),
           population_exceeds_1_million,
+          disprove(have_hosted_the_olympics_(wintergames)),
           have_hosted_the_very_first_olympics.
 
+berlin :- disprove(is_part_of_scandinavia),
+          population_exceeds_1_million,
+          verify(have_hosted_the_olympics_(summergames)),
+          verify(have_been_divided_in_east_and_west_separated_with_a_wall).
+
+brussel :- disprove(is_part_of_scandinavia),
+          population_exceeds_1_million,
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          verify(capital_of_EU).
 
         
 
