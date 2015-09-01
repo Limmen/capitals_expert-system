@@ -3,7 +3,8 @@
 
     start with ?- go.     */
 
-go :- hypothesize(Capital),
+go :- undo,
+      hypothesize(Capital),
       write('I guess that the capital is: '),
       write(Capital),
       nl,
@@ -19,6 +20,7 @@ hypothesize(amsterdam)     :- amsterdam, !.
 hypothesize(athens)     :- athens, !.
 hypothesize(berlin)     :- berlin, !.
 hypothesize(brussel)     :- brussel, !.
+hypothesize(dublin)     :- dublin, !.
 /* Not yet implemented
 
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
@@ -28,7 +30,6 @@ hypothesize(bratislava)     :- bratislava, !.
 hypothesize(bucharest)     :- bucharest, !.
 hypothesize(budapest)     :- budapest, !.
 hypothesize(chisinau)     :- chisinau, !.
-hypothesize(dublin)     :- dublin, !.
 hypothesize(kiev)     :- kiev, !.
 hypothesize(lisbon)     :- lisbon, !.
 hypothesize(ljubljana)     :- ljubljana, !.
@@ -62,7 +63,7 @@ hypothesize(unknown).             /* no diagnosis */
 
 /* capital identification rules */
 stockholm :- verify(is_part_of_scandinavia),
-             verify(have_hosted_the_olympics_(summergames)),
+             optional_verify(have_hosted_the_olympics_(summergames)),
              disprove(have_hosted_the_olympics_(vintergames)),
              population_exceeds_1_million,
              verify(capital_of_country_where_snus_originated).
@@ -74,7 +75,7 @@ copenhagen :- verify(is_part_of_scandinavia),
               verify(hometown_of_Niels_Bohr).
 
 helsinki :- verify(is_part_of_scandinavia),
-            verify(have_hosted_the_olympics_(summergames)),
+            optional_verify(have_hosted_the_olympics_(summergames)),
             disprove(have_hosted_the_olympics_(vintergames)),
             population_under_1_million,
             verify(hometown_of_linux).
@@ -90,7 +91,7 @@ oslo :- verify(is_part_of_scandinavia),
         population_exceeds_1_million.
 
 amsterdam :- disprove(is_part_of_scandinavia),
-             verify(have_hosted_the_olympics_(summergames)),
+             optional_verify(have_hosted_the_olympics_(summergames)),
              disprove(have_hosted_the_olympics_(vintergames)),
              population_exceeds_1_million,
              verify(capital_of_worlds_highest_coffee_consumption_per_capita_country).
@@ -102,7 +103,7 @@ athens :- disprove(is_part_of_scandinavia),
 
 berlin :- disprove(is_part_of_scandinavia),
           population_exceeds_1_million,
-          verify(have_hosted_the_olympics_(summergames)),
+          optional_verify(have_hosted_the_olympics_(summergames)),
           verify(have_been_divided_in_east_and_west_separated_with_a_wall).
 
 brussel :- disprove(is_part_of_scandinavia),
@@ -110,6 +111,12 @@ brussel :- disprove(is_part_of_scandinavia),
           disprove(have_hosted_the_olympics_(summergames)),
           disprove(have_hosted_the_olympics_(wintergames)),
           verify(capital_of_EU).
+
+dublin :- disprove(is_part_of_scandinavia),
+          population_exceeds_1_million,
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          verify(home_of_Guinness_(the_beer)).
 
         
 
@@ -129,7 +136,7 @@ population_exceeds_1_million :-
 
 have_hosted_the_very_first_olympics:-
     verify(have_hosted_the_very_first_olympics),
-    assert(yes(have_hosted_the_olympics_(summergames)).
+    assert(yes(have_hosted_the_olympics_(summergames))).
     
 
 /* how to ask questions */
@@ -147,7 +154,21 @@ ask(Question) :-
           (assert(no(Question)), fail);
       fail).
 
-:- dynamic yes/1,no/1.
+ask_optional(Question) :-
+    write('Is this true for the capital: '),
+    write(Question),
+    write('? '),
+    read(Response),
+    nl,
+    ( (Response == yes ; Response == y)
+      ->
+       assert(yes(Question)) ;
+      (Response == no ; Response == n)
+      ->
+          (assert(no(Question)), fail);
+      assert(dont_know(Question)), true).
+
+:- dynamic yes/1,no/1,dont_know/1.
 
 /* How to verify something */
 verify(S) :-
@@ -156,8 +177,24 @@ verify(S) :-
     true ;
     (no(S)
      ->
-     fail ;
-     ask(S))).
+     fail;
+     (dont_know(S)
+     ->
+     true;
+     ask(S)))).
+
+/* Optional to answer (execution will continue if user doesn't know) */
+optional_verify(S) :-
+   (yes(S) 
+    ->
+    true ;
+    (no(S)
+     ->
+     fail;
+     (dont_know(S)
+     ->
+     true;
+     ask_optional(S)))).
 
 /* How to disprove something */
 disprove(S) :-
