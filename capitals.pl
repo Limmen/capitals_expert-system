@@ -89,6 +89,17 @@ oslo :- verify(is_part_of_scandinavia),
         verify(have_hosted_the_olympics_(vintergames)),
         population_exceeds_1_million.
 
+amsterdam :- disprove(is_part_of_scandinavia),
+             verify(have_hosted_the_olympics_(summergames)),
+             disprove(have_hosted_the_olympics_(vintergames)),
+             population_exceeds_1_million,
+             verify(capital_of_worlds_highest_coffee_consumption_per_capita_country).
+
+athens :- disprove(is_part_of_scandinavia),
+          population_exceeds_1_million,
+          have_hosted_the_very_first_olympics.
+
+
         
 
 /* classification rules */
