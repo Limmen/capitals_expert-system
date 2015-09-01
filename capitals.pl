@@ -14,6 +14,51 @@ hypothesize(stockholm)   :- stockholm, !.
 hypothesize(reykjavik)     :- reykjavik, !.
 hypothesize(helsinki)     :- helsinki, !.
 hypothesize(copenhagen)     :- copenhagen, !.
+hypothesize(oslo)     :- oslo, !.
+
+/* Not yet implemented
+
+hypothesize(amsterdam)     :- amsterdam, !.
+hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
+hypothesize(athens)     :- athens, !.
+hypothesize(belgrade)     :- belgrade, !.
+hypothesize(berlin)     :- berlin, !.
+hypothesize(bern)     :- bern, !.
+hypothesize(bratislava)     :- bratislava, !.
+hypothesize(brussel)     :- brussel, !.
+hypothesize(bucharest)     :- bucharest, !.
+hypothesize(budapest)     :- budapest, !.
+hypothesize(chisinau)     :- chisinau, !.
+hypothesize(dublin)     :- dublin, !.
+hypothesize(kiev)     :- kiev, !.
+hypothesize(lisbon)     :- lisbon, !.
+hypothesize(ljubljana)     :- ljubljana, !.
+hypothesize(london)     :- london, !.
+hypothesize(luxembourg)     :- luxembourg, !.
+hypothesize(madrid)     :- madrid, !.
+hypothesize(minsk)     :- minsk, !.
+hypothesize(monaco)     :- monaco, !.
+hypothesize(moscow)     :- moscow, !.
+hypothesize(nicosia)     :- nicosia, !.
+hypothesize(nuuk)     :- nuuk, !.
+hypothesize(paris)     :- paris, !.
+hypothesize(podgorica)     :- podgorica, !.
+hypothesize(prague)     :- prague, !.
+hypothesize(riga)     :- riga, !.
+hypothesize(rome)     :- rome, !.
+hypothesize(san_marino)     :- san_marino, !.
+hypothesize(sarajevo)     :- sarajevo, !.
+hypothesize(skopje)     :- skopje, !.
+hypothesize(sofia)     :- sofia, !.
+hypothesize(tallinn)     :- tallinn, !.
+hypothesize(tirana)     :- tirana, !.
+hypothesize(vaduz)     :- vaduz, !.
+hypothesize(valletta)     :- valletta, !.
+hypothesize(vatican_city)     :- vatican_city, !.
+hypothesize(vilnius)     :- vilnius, !.
+hypothesize(warsaw)     :- warsaw, !.
+hypothesize(zagreb)     :- zagreb, !.
+*/
 hypothesize(unknown).             /* no diagnosis */
 
 /* capital identification rules */
@@ -61,7 +106,10 @@ ask(Question) :-
     ( (Response == yes ; Response == y)
       ->
        assert(yes(Question)) ;
-       assert(no(Question)), fail).
+      (Respone == no ; Response == n)
+      ->
+          (assert(no(Question)), fail);
+      fail).
 
 :- dynamic yes/1,no/1.
 
