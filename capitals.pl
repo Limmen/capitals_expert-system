@@ -1,9 +1,16 @@
-/* animal.pro
-  animal identification game.  
+/* capitals.pl
 
-    start with ?- go.     */
+Capitals in Europe identification game.
+Start with start.
+Answer questions with: y,yes,n,no (anything else will be interpreted as "don't know").
 
-go :- undo,
+For someone unfamiliar with prolog repl: every answer you type need to be followed byt a period (.) and then press Enter.
+*/
+
+:- ensure_loaded(['capital_rules.pl','classification_rules.pl', 'user_interaction.pl']).
+
+/* Startup */
+start :- undo,
       hypothesize(Capital),
       write('I guess that the capital is: '),
       write(Capital),
@@ -21,6 +28,7 @@ hypothesize(athens)     :- athens, !.
 hypothesize(berlin)     :- berlin, !.
 hypothesize(brussel)     :- brussel, !.
 hypothesize(dublin)     :- dublin, !.
+
 /* Not yet implemented
 
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
@@ -59,151 +67,8 @@ hypothesize(vilnius)     :- vilnius, !.
 hypothesize(warsaw)     :- warsaw, !.
 hypothesize(zagreb)     :- zagreb, !.
 */
-hypothesize(unknown).             /* no diagnosis */
 
-/* capital identification rules */
-stockholm :- verify(is_part_of_scandinavia),
-             optional_verify(have_hosted_the_olympics_(summergames)),
-             disprove(have_hosted_the_olympics_(vintergames)),
-             population_exceeds_1_million,
-             verify(capital_of_country_where_snus_originated).
+/* If no other capital in the knowledgebase can be identified */
+hypothesize(unknown).           
 
-copenhagen :- verify(is_part_of_scandinavia),
-              disprove(have_hosted_the_olympics_(summergames)),
-              disprove(have_hosted_the_olympics_(vintergames)),
-              population_exceeds_1_million,
-              verify(hometown_of_Niels_Bohr).
 
-helsinki :- verify(is_part_of_scandinavia),
-            optional_verify(have_hosted_the_olympics_(summergames)),
-            disprove(have_hosted_the_olympics_(vintergames)),
-            population_under_1_million,
-            verify(hometown_of_linux).
-
-reykjavik :- verify(is_part_of_scandinavia),
-             disprove(have_hosted_the_olympics_(summergames)),
-             population_under_half_a_million,
-             verify(the_northernmost_town_in_the_world).
-
-oslo :- verify(is_part_of_scandinavia), 
-        disprove(have_hosted_the_olympics_(summergames)),
-        verify(have_hosted_the_olympics_(vintergames)),
-        population_exceeds_1_million.
-
-amsterdam :- disprove(is_part_of_scandinavia),
-             optional_verify(have_hosted_the_olympics_(summergames)),
-             disprove(have_hosted_the_olympics_(vintergames)),
-             population_exceeds_1_million,
-             verify(capital_of_worlds_highest_coffee_consumption_per_capita_country).
-
-athens :- disprove(is_part_of_scandinavia),
-          population_exceeds_1_million,
-          disprove(have_hosted_the_olympics_(wintergames)),
-          have_hosted_the_very_first_olympics.
-
-berlin :- disprove(is_part_of_scandinavia),
-          population_exceeds_1_million,
-          optional_verify(have_hosted_the_olympics_(summergames)),
-          verify(have_been_divided_in_east_and_west_separated_with_a_wall).
-
-brussel :- disprove(is_part_of_scandinavia),
-          population_exceeds_1_million,
-          disprove(have_hosted_the_olympics_(summergames)),
-          disprove(have_hosted_the_olympics_(wintergames)),
-          verify(capital_of_EU).
-
-dublin :- disprove(is_part_of_scandinavia),
-          population_exceeds_1_million,
-          disprove(have_hosted_the_olympics_(summergames)),
-          disprove(have_hosted_the_olympics_(wintergames)),
-          verify(home_of_Guinness_(the_beer)).
-
-        
-
-/* classification rules */
-
-population_under_half_a_million :-
-    disprove(population_exceeds_1_million),
-    verify(population_under_half_a_million).
-
-population_under_1_million :-
-    disprove(population_exceeds_1_million).
-
-population_exceeds_1_million :-
-    disprove(population_under_1_million),
-    disprove(population_under_half_a_million),
-    verify(population_exceeds_1_million).
-
-have_hosted_the_very_first_olympics:-
-    verify(have_hosted_the_very_first_olympics),
-    assert(yes(have_hosted_the_olympics_(summergames))).
-    
-
-/* how to ask questions */
-ask(Question) :-
-    write('Is this true for the capital: '),
-    write(Question),
-    write('? '),
-    read(Response),
-    nl,
-    ( (Response == yes ; Response == y)
-      ->
-       assert(yes(Question)) ;
-      (Response == no ; Response == n)
-      ->
-          (assert(no(Question)), fail);
-      fail).
-
-ask_optional(Question) :-
-    write('Is this true for the capital: '),
-    write(Question),
-    write('? '),
-    read(Response),
-    nl,
-    ( (Response == yes ; Response == y)
-      ->
-       assert(yes(Question)) ;
-      (Response == no ; Response == n)
-      ->
-          (assert(no(Question)), fail);
-      assert(dont_know(Question)), true).
-
-:- dynamic yes/1,no/1,dont_know/1.
-
-/* How to verify something */
-verify(S) :-
-   (yes(S) 
-    ->
-    true ;
-    (no(S)
-     ->
-     fail;
-     (dont_know(S)
-     ->
-     true;
-     ask(S)))).
-
-/* Optional to answer (execution will continue if user doesn't know) */
-optional_verify(S) :-
-   (yes(S) 
-    ->
-    true ;
-    (no(S)
-     ->
-     fail;
-     (dont_know(S)
-     ->
-     true;
-     ask_optional(S)))).
-
-/* How to disprove something */
-disprove(S) :-
-   (yes(S) 
-    ->
-    fail ;
-    true).
-
-/* undo all yes/no assertions */
-undo :- retract(yes(_)),fail. 
-undo :- retract(no(_)),fail.
-undo.
