@@ -62,4 +62,11 @@ dublin :- disprove(is_part_of_scandinavia),
           disprove(have_hosted_the_olympics_(wintergames)),
           verify(home_of_Guinness_(the_beer)).
 
+madrid :- disprove(is_part_of_scandinavia),
+          population_exceeds_1_million,
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          (verify(highest_located_city_in_europe);
+          verify(hometown_of_Raúl_González_Blanco)).
+
         

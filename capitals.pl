@@ -28,6 +28,7 @@ hypothesize(athens)     :- athens, !.
 hypothesize(berlin)     :- berlin, !.
 hypothesize(brussel)     :- brussel, !.
 hypothesize(dublin)     :- dublin, !.
+hypothesize(madrid)     :- madrid, !.
 
 /* Not yet implemented
 
@@ -43,7 +44,6 @@ hypothesize(lisbon)     :- lisbon, !.
 hypothesize(ljubljana)     :- ljubljana, !.
 hypothesize(london)     :- london, !.
 hypothesize(luxembourg)     :- luxembourg, !.
-hypothesize(madrid)     :- madrid, !.
 hypothesize(minsk)     :- minsk, !.
 hypothesize(monaco)     :- monaco, !.
 hypothesize(moscow)     :- moscow, !.
