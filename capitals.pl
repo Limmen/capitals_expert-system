@@ -19,6 +19,7 @@ start :- undo,
 
 /* hypotheses to be tested */
 hypothesize(stockholm)   :- stockholm, !.
+hypothesize(paris)     :- paris, !.
 hypothesize(reykjavik)     :- reykjavik, !.
 hypothesize(tallinn)     :- tallinn, !.
 hypothesize(helsinki)     :- helsinki, !.
@@ -34,6 +35,9 @@ hypothesize(moscow)     :- moscow, !.
 hypothesize(london)     :- london, !.
 hypothesize(riga)     :- riga, !.
 hypothesize(vilnius)     :- vilnius, !.
+hypothesize(paris)     :- paris, !.
+hypothesize(rome)     :- rome, !.
+hypothesize(sarajevo)     :- sarajevo, !.
 /* Not yet implemented
 
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
@@ -51,12 +55,9 @@ hypothesize(minsk)     :- minsk, !.
 hypothesize(monaco)     :- monaco, !.
 hypothesize(nicosia)     :- nicosia, !.
 hypothesize(nuuk)     :- nuuk, !.
-hypothesize(paris)     :- paris, !.
 hypothesize(podgorica)     :- podgorica, !.
 hypothesize(prague)     :- prague, !.
-hypothesize(rome)     :- rome, !.
 hypothesize(san_marino)     :- san_marino, !.
-hypothesize(sarajevo)     :- sarajevo, !.
 hypothesize(skopje)     :- skopje, !.
 hypothesize(sofia)     :- sofia, !.
 hypothesize(tirana)     :- tirana, !.
