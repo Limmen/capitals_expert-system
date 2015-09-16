@@ -32,6 +32,8 @@ hypothesize(dublin)     :- dublin, !.
 hypothesize(madrid)     :- madrid, !.
 hypothesize(moscow)     :- moscow, !.
 hypothesize(london)     :- london, !.
+hypothesize(riga)     :- riga, !.
+hypothesize(vilnius)     :- vilnius, !.
 /* Not yet implemented
 
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
@@ -52,7 +54,6 @@ hypothesize(nuuk)     :- nuuk, !.
 hypothesize(paris)     :- paris, !.
 hypothesize(podgorica)     :- podgorica, !.
 hypothesize(prague)     :- prague, !.
-hypothesize(riga)     :- riga, !.
 hypothesize(rome)     :- rome, !.
 hypothesize(san_marino)     :- san_marino, !.
 hypothesize(sarajevo)     :- sarajevo, !.
@@ -62,7 +63,6 @@ hypothesize(tirana)     :- tirana, !.
 hypothesize(vaduz)     :- vaduz, !.
 hypothesize(valletta)     :- valletta, !.
 hypothesize(vatican_city)     :- vatican_city, !.
-hypothesize(vilnius)     :- vilnius, !.
 hypothesize(warsaw)     :- warsaw, !.
 hypothesize(zagreb)     :- zagreb, !.
 */
