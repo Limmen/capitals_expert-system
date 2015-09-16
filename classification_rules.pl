@@ -22,4 +22,7 @@ population_exceeds_1_million :-
 have_hosted_the_very_first_olympics:-
     verify(have_hosted_the_very_first_olympics),
     assert(yes(have_hosted_the_olympics_(summergames))).
-    
+
+capital_of_EU:-
+    verify(part_of_EU),
+    verify(captial_of_EU).
