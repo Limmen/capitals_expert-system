@@ -7,15 +7,12 @@ Answer questions with: y,yes,n,no (anything else will be interpreted as "don't k
 For someone unfamiliar with prolog repl: every answer you type need to be followed byt a period (.) and then press Enter.
 */
 
-:- ensure_loaded(['capital_rules.pl','classification_rules.pl', 'user_interaction.pl']).
+:- ensure_loaded(['capital_rules.pl','classification_rules.pl', 'user_interaction.pl', 'questions.pl']).
 
 /* Startup */
-start :- undo,
+start(Request) :-
       hypothesize(Capital),
-      write('I guess that the capital is: '),
-      write(Capital),
-      nl,
-      undo.
+      render(Capital, Request).
 
 /* hypotheses to be tested */
 hypothesize(stockholm)   :- stockholm, !.
