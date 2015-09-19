@@ -19,6 +19,18 @@
 
 :- multifile http:location/3.
 
+http:location(files, '/f', []).
+
+% this serves files from the directory assets
+% under the working directory
+:- http_handler(files(.), serve_files, [prefix]).
+
+serve_files(Request) :-
+	 http_reply_from_files('resources', [], Request).
+serve_files(Request) :-
+	  http_404([], Request).
+
+
 % this serves files from the directory assets
 % under the working directory
 :- http_handler('/', root_handler, []).
@@ -62,8 +74,9 @@ render_question(done, Request):-
 render_question(Question, Request):-
 	reply_html_page(
 	    title('POST demo'),
-        p('Is this true for the capital: ~w ?'-[Question]),
+        p(class=test,'Is this true for the capital: ~w ?'-[Question]),
 	    [
+            \html_requires(files('test.css')),
 	     form([action='/form_handler', method='POST'], [
 		p([], [
 		  label([for=response],'Answer'),
