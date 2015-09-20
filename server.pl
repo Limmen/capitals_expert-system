@@ -74,9 +74,10 @@ render_question(done, Request):-
 render_question(Question, Request):-
 	reply_html_page(
 	    title('POST demo'),
-        p(class=test,'Is this true for the capital: ~w ?'-[Question]),
-	    [
+	   div(class='center-block container',[
             \html_requires(files('test.css')),
+            \html_requires(files('bootstrap.min.css')),
+            p(class=test,'Is this true for the capital: ~w ?'-[Question]),
 	     form([action='/form_handler', method='POST'], [
 		p([], [
 		  label([for=response],'Answer'),
@@ -91,7 +92,7 @@ render_question(Question, Request):-
          form([action='/undo_handler', method='POST'], [
 		          p([], input([name=submit, type=submit, value='Restart (undo all answers)'], []))
 	         ])
-        ]).
+        ])).
 
 
 render_answer(Capital, Request):-
