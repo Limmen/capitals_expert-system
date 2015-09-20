@@ -81,7 +81,7 @@ render_question(Question, Request):-
             p([class=question],['Is  this true for the capital: ', b('~w ?'-[Question]), ' (yes/no)']),
 	     form([action='/form_handler', method='POST'], [
 		div([class='form-group input'], [
-		  input([id=response, class='form-control'])
+		  input([name=response, id=response, class='form-control'])
 		      ]),
         p([], [
 		      input([name=question, type=hidden, value='~w'-[Question]])
@@ -102,7 +102,7 @@ render_answer(Capital, Request):-
                 \html_requires(files('style.css')),
                 \html_requires(files('bootstrap.min.css')),
                 h1([class=title], ['Let me guess the capital you are thinking of.', small('(Europe only!)')]),
-                p([class=question],['I guess that the capital is:  ', b('~w ?'-[Capital])]),
+                p([class=question],['I guess that the capital is:  ', b('~w '-[Capital])]),
             form([action='/undo_handler', method='POST'], [
 		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	            ])
