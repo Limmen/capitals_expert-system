@@ -73,24 +73,24 @@ render_question(done, Request):-
 
 render_question(Question, Request):-
 	reply_html_page(
-	    title('POST demo'),
+	    title('Guess the capital'),
 	   div(class='center-block container',[
-            \html_requires(files('test.css')),
+            \html_requires(files('style.css')),
             \html_requires(files('bootstrap.min.css')),
-            p(class=test,'Is this true for the capital: ~w ?'-[Question]),
+            h1([class=title], ['Let me guess the capital you are thinking of.', small('(Europe only!)')]),
+            p([class=question],['Is  this true for the capital: ', b('~w ?'-[Question]), ' (yes/no)']),
 	     form([action='/form_handler', method='POST'], [
-		p([], [
-		  label([for=response],'Answer'),
-		  input([name=response, type=textarea])
+		div([class='form-group input'], [
+		  input([id=response, class='form-control'])
 		      ]),
         p([], [
 		      input([name=question, type=hidden, value='~w'-[Question]])
 		 ]),
-		p([], input([name=submit, type=submit, value='Submit'], []))
+		button([class='btn btn-default', type=submit], ['Answer'])
 	      ]),
          p(''),
          form([action='/undo_handler', method='POST'], [
-		          p([], input([name=submit, type=submit, value='Restart (undo all answers)'], []))
+		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	         ])
         ])).
 
@@ -98,10 +98,13 @@ render_question(Question, Request):-
 render_answer(Capital, Request):-
     reply_html_page(
 	    title('Answer'),
-        p('I guess that the capital is:  ~w'-[Capital]),
-        [
+        div(class='center-block container',[
+                \html_requires(files('style.css')),
+                \html_requires(files('bootstrap.min.css')),
+                h1([class=title], ['Let me guess the capital you are thinking of.', small('(Europe only!)')]),
+                p([class=question],['I guess that the capital is:  ', b('~w ?'-[Capital])]),
             form([action='/undo_handler', method='POST'], [
-		             p([], input([name=submit, type=submit, value='Restart (undo all answers)'], []))
+		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	            ])
         ]
-        ).
+        )).
