@@ -96,7 +96,7 @@ render_question(Question, Request):-
 
 
 render_answer(Capital, Request):-
-    reply_html_page
+    reply_html_page(
 	    title('Guess the capital'),
         div(class='center-block container',[
                 \html_requires(files('style.css')),
