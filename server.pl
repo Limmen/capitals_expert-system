@@ -84,7 +84,7 @@ render_question(Question, Request):-
             p([class=question],['Is  this true for the capital: ', b('~w ?'-[Question]), ' (yes/no)']),
 	     form([action='/form_handler', method='POST'], [
 		div([class='form-group input'], [
-		  input([name=response, id=response, class='form-control'])
+		  input([name=response, id=response, class='form-control', required])
 		      ]),
         p([], [
 		      input([name=question, type=hidden, value='~w'-[Question]])
@@ -96,7 +96,6 @@ render_question(Question, Request):-
 		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	         ])
         ])).
-
 
 render_answer(Capital, Request):-
     reply_html_page(

@@ -91,7 +91,6 @@ question(have_been_divided_in_east_and_west_separated_with_a_wall):- not(asked(h
                                                                      assert(asked(have_been_divided_in_east_and_west_separated_with_a_wall)).
 
 question(home_of_Guinness_(the_beer)):- not(asked(home_of_Guinness_(the_beer))),
-                                        http_log("~n guinness is still not asked ~n", []),
                                         disprove(is_part_of_scandinavia),
                                         disprove(capital_of_a_baltic_country),
                                         disprove(was_part_of_the_soviet_union),
