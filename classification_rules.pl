@@ -9,6 +9,7 @@ This file contains rules for classifying capitals
 
 population_under_half_a_million :-
     disprove(population_exceeds_1_million),
+    verify(population_under_1_million),
     verify(population_under_half_a_million).
 
 population_under_1_million :-

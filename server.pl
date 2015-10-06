@@ -15,6 +15,9 @@
 
 :- use_module(library(http/http_parameters)).
 
+%log with http_log("", [])
+:- use_module(library(http/http_log)).
+
 :- ensure_loaded(['capitals.pl']).
 
 :- multifile http:location/3.
@@ -48,7 +51,6 @@ form_handler(Request) :-
     http_parameters(Request,
                     [response(Response, [atom]),
                    question(Question, [atom])]),
-    assert(asked(Question)),
     ((Response == yes ; Response == y)
       ->
           assert(yes(Question));
@@ -63,8 +65,9 @@ undo_handler(Request) :-
     http_redirect(moved, '/', Request). 
 
 
-render(unknown, Request):- question(Question),
-                           render_question(Question, Request).
+render(unknown, Request):-
+    question(Question),
+    render_question(Question, Request).
                            
 render(Capital, Request):- render_answer(Capital, Request).
 

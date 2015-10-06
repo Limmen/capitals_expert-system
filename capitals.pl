@@ -12,6 +12,7 @@ For someone unfamiliar with prolog repl: every answer you type need to be follow
 /* Startup */
 start(Request) :-
       hypothesize(Capital),
+      http_log('~n hypothesize returned : ~p ~n ', [Capital]),
       render(Capital, Request).
 
 /* hypotheses to be tested */
