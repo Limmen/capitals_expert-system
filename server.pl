@@ -101,6 +101,7 @@ render_question(Question, Request):-
         ])).
 
 render_answer(Capital, Request, Facts):-
+    render_facts(Facts, FactsHTML),
     reply_html_page(
 	    title('Guess the capital'),
         div(class='center-block container',[
@@ -110,9 +111,16 @@ render_answer(Capital, Request, Facts):-
                 p([class=question],['I guess that the capital is:  ', b('~w '-[Capital])]),
                 h2([class=answer],['How I came up with the answer: ']),
                 p([class=reasoning],['You said these facts where true for the city: ']),
-                p([class=facts],'~w '-[Facts]),
+                ul(FactsHTML),
             form([action='/undo_handler', method='POST'], [
 		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	            ])
         ]
         )).
+
+%render_list() return list of facts in <ul> <li>1
+render_facts([], []).
+
+render_facts([X|Xs],[Y|Ys]):-
+    Y = li([class=facts],'~w '-[X]),
+    render_facts(Xs, Ys).
