@@ -69,10 +69,13 @@ render(unknown, Request):-
     question(Question),
     render_question(Question, Request).
                            
-render(Capital, Request):- render_answer(Capital, Request).
+render(Capital, Request):-
+    findall(X,yes(X),Facts),
+    render_answer(Capital, Request, Facts).
 
 render_question(done, Request):-
-    render_answer(unknown, Request).
+    findall(X,yes(X),Facts),
+    render_answer(unknown, Request, Facts).
 
 render_question(Question, Request):-
 	reply_html_page(
@@ -97,7 +100,7 @@ render_question(Question, Request):-
 	         ])
         ])).
 
-render_answer(Capital, Request):-
+render_answer(Capital, Request, Facts):-
     reply_html_page(
 	    title('Guess the capital'),
         div(class='center-block container',[
@@ -105,6 +108,9 @@ render_answer(Capital, Request):-
                 \html_requires(files('bootstrap.min.css')),
                 h1([class=title], ['Let me guess the capital you are thinking of.', small('(Europe only!)')]),
                 p([class=question],['I guess that the capital is:  ', b('~w '-[Capital])]),
+                h2([class=answer],['How I came up with the answer: ']),
+                p([class=reasoning],['You said these facts where true for the city: ']),
+                p([class=facts],'~w '-[Facts]),
             form([action='/undo_handler', method='POST'], [
 		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
 	            ])
