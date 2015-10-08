@@ -2,3 +2,27 @@
 {
     margin-top: 6%;
 }
+
+.buttons
+{
+    margin-bottom: 5%
+}
+
+.yes
+{
+    background: green;
+    color: white;
+    display-style: inline
+}
+.no
+{
+    background: red;
+    color: white;
+    display-style: inline
+}
+
+
+.undo
+{
+    margin-top: 5%;
+}

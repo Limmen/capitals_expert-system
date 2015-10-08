@@ -80,24 +80,36 @@ render_question(done, Request):-
 render_question(Question, Request):-
 	reply_html_page(
 	    title('Guess the capital'),
-	   div(class='center-block container',[
+	   div(class='container',[
             \html_requires(files('style.css')),
             \html_requires(files('bootstrap.min.css')),
+            div([class='row'], [
+            div([class='col-sm-2'], [ ]),
+            div([class='col-sm-6'], [
             h1([class=title], ['Let me guess the capital you are thinking of.', small('(Europe only!)')]),
             p([class=question],['Is  this true for the capital: ', b('~w ?'-[Question]), ' (yes/no)']),
-	     form([action='/form_handler', method='POST'], [
-		div([class='form-group input'], [
-		  input([name=response, id=response, class='form-control', required])
-		      ]),
-        p([], [
-		      input([name=question, type=hidden, value='~w'-[Question]])
-		 ]),
-		button([class='btn btn-default', type=submit], ['Answer'])
-	      ]),
-         p(''),
+            div([class='n'], [
+%                    div([class='col-sm-4'], [ ]),
+		div([class='col-sm-2'], [ 
+                form([class='form-inline ',action='/form_handler', method='POST'], [
+                         input([name=response, id=response, type=hidden, class='form-control', value='yes']),
+		                 input([name=question, type=hidden, value='~w'-[Question]]),
+		                 button([class='btn btn-default yes', type=submit], ['Yes'])
+	                ]) ]),
+        div([class='col-sm-2'], [ 
+                form([class='form-inline', action='/form_handler', method='POST'], [
+                         input([name=response, id=response, type=hidden, class='form-control', value='no']),
+		                 input([name=question, type=hidden, value='~w'-[Question]]),
+		                 button([class='btn btn-default no', type=submit], ['No'])
+	                ]) ]),
+                           div([class='col-sm-8'], [ ]) ]),
+            div([class='row'], [ ]),
+          div([class='undo'], [  
          form([action='/undo_handler', method='POST'], [
 		          button([class='btn btn-default', type=submit], ['Restart (undo all answers)'])
-	         ])
+	         ]) ]) ]),
+            div([class='col-sm-2'], [ ])
+               ])
         ])).
 
 render_answer(Capital, Request, Facts):-
