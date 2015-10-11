@@ -225,4 +225,25 @@ zagreb :- disprove(is_part_of_scandinavia),
           verify(offers_free_wifi_in_whole_city_centre).
 
 
+belgrade :- disprove(is_part_of_scandinavia),
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          disprove(capital_of_a_baltic_country),
+          disprove(was_part_of_the_soviet_union),
+          disprove(is_part_of_G7),
+          disprove(official_currency_is_Euro),
+          disprove(part_of_EU),
+          verify(was_part_of_former_yugoslavia),
+          verify(has_its_own_silicon_valley).
+
+skopje :- disprove(is_part_of_scandinavia),
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          disprove(capital_of_a_baltic_country),
+          disprove(was_part_of_the_soviet_union),
+          disprove(is_part_of_G7),
+          disprove(official_currency_is_Euro),
+          disprove(part_of_EU),
+          verify(was_part_of_former_yugoslavia),
+          verify(mother_theresa_was_born_and_lived_here).
 

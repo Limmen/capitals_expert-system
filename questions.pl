@@ -187,6 +187,31 @@ question(location_of_a_tragic_supermaket_collapse):- not(asked(location_of_a_tra
                                                      verify(capital_of_a_baltic_country),
                                                      assert(asked(location_of_a_tragic_supermaket_collapse)).
 
+question(has_its_own_silicon_valley) :- not(asked(has_its_own_silicon_valley)),
+                                        disprove(is_part_of_scandinavia),
+                                        disprove(have_hosted_the_olympics_(summergames)),
+                                        disprove(have_hosted_the_olympics_(wintergames)),
+                                        disprove(capital_of_a_baltic_country),
+                                        disprove(was_part_of_the_soviet_union),
+                                        disprove(is_part_of_G7),
+                                        disprove(official_currency_is_Euro),
+                                        disprove(part_of_EU),
+                                        verify(was_part_of_former_yugoslavia),
+                                        assert(asked(has_its_own_silicon_valley)).
+
+question(mother_theresa_was_born_and_lived_here) :- not(asked(mother_theresa_was_born_and_lived_here)),
+                                                    disprove(is_part_of_scandinavia),
+                                                    disprove(have_hosted_the_olympics_(summergames)),
+                                                    disprove(have_hosted_the_olympics_(wintergames)),
+                                                    disprove(capital_of_a_baltic_country),
+                                                    disprove(was_part_of_the_soviet_union),
+                                                    disprove(is_part_of_G7),
+                                                    disprove(official_currency_is_Euro),
+                                                    disprove(part_of_EU),
+                                                    verify(was_part_of_former_yugoslavia),
+                                                    assert(asked(mother_theresa_was_born_and_lived_here)).
+
+
 question(declared_official_capital_year_1990):- not(asked(declared_official_capital_year_1990)),
                                                 disprove(is_part_of_scandinavia),
                                                 disprove(have_hosted_the_olympics_(summergames)),
