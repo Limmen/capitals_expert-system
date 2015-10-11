@@ -222,6 +222,19 @@ question(location_of_assasination_that_triggered_word_war_I):- not(asked(locatio
                                                                population_under_1_million,
                                                                assert(asked(location_of_assasination_that_triggered_word_war_I)).
 
+question(capital_of_the_westernmost_country_of_the_European_mainland):- not(asked(capital_of_the_westernmost_country_of_the_European_mainland)),
+                                                               disprove(is_part_of_scandinavia),
+                                                               disprove(have_hosted_the_olympics_(summergames)),
+                                                               disprove(have_hosted_the_olympics_(wintergames)),
+                                                               disprove(capital_of_a_baltic_country),
+                                                               disprove(was_part_of_the_soviet_union),
+                                                               disprove(is_part_of_G7),
+                                                               verify(part_of_EU),
+                                                               verify(official_currency_is_Euro),
+                                                               assert(asked(capital_of_the_westernmost_country_of_the_European_mainland)).
+
+
+
 question(population_exceeds_1_million):- not(asked(population_exceeds_1_million)),
                                          disprove(population_under_1_million),
                                          disprove(population_under_half_a_million),

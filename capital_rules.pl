@@ -201,5 +201,15 @@ sarajevo :- disprove(is_part_of_scandinavia),
             population_under_1_million,
             verify(location_of_assasination_that_triggered_word_war_I).
 
+lisbon :- disprove(is_part_of_scandinavia),
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          disprove(capital_of_a_baltic_country),
+          disprove(was_part_of_the_soviet_union),
+          disprove(is_part_of_G7),
+          verify(part_of_EU),
+          verify(official_currency_is_Euro),
+          verify(capital_of_the_westernmost_country_of_the_European_mainland).
+
 
 

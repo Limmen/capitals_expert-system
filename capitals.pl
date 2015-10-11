@@ -35,6 +35,7 @@ hypothesize(vilnius)     :- vilnius, !.
 hypothesize(paris)     :- paris, !.
 hypothesize(rome)     :- rome, !.
 hypothesize(sarajevo)     :- sarajevo, !.
+hypothesize(lisbon)     :- lisbon, !.
 /* Not yet implemented
 
 hypothesize(andorra_la_vella)     :- andorra_la_vella, !.
@@ -45,7 +46,6 @@ hypothesize(bucharest)     :- bucharest, !.
 hypothesize(budapest)     :- budapest, !.
 hypothesize(chisinau)     :- chisinau, !.
 hypothesize(kiev)     :- kiev, !.
-hypothesize(lisbon)     :- lisbon, !.
 hypothesize(ljubljana)     :- ljubljana, !.
 hypothesize(luxembourg)     :- luxembourg, !.
 hypothesize(minsk)     :- minsk, !.
