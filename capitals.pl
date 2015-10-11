@@ -27,6 +27,7 @@ hypothesize(athens)     :- athens, !.
 hypothesize(berlin)     :- berlin, !.
 hypothesize(brussel)     :- brussel, !.
 hypothesize(dublin)     :- dublin, !.
+hypothesize(zagreb)     :- zagreb, !.
 hypothesize(madrid)     :- madrid, !.
 hypothesize(moscow)     :- moscow, !.
 hypothesize(london)     :- london, !.
@@ -62,7 +63,6 @@ hypothesize(vaduz)     :- vaduz, !.
 hypothesize(valletta)     :- valletta, !.
 hypothesize(vatican_city)     :- vatican_city, !.
 hypothesize(warsaw)     :- warsaw, !.
-hypothesize(zagreb)     :- zagreb, !.
 */
 
 /* If no other capital in the knowledgebase can be identified */

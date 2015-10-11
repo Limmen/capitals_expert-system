@@ -14,6 +14,13 @@ question(capital_of_a_baltic_country):- not(asked(capital_of_a_baltic_country)),
                                         disprove(is_part_of_scandinavia),
                                         assert(asked(capital_of_a_baltic_country)).
 
+question(was_part_of_former_yugoslavia):- not(asked(was_part_of_former_yugoslavia)),
+                                        disprove(is_part_of_G7),
+                                        disprove(is_part_of_scandinavia),
+                                        disprove(capital_of_baltic_country),                                        
+                                        assert(asked(was_part_of_former_yugoslavia)).
+
+
 question(part_of_EU):- not(asked(part_of_EU)),
                        assert(asked(part_of_EU)).
 
@@ -220,6 +227,7 @@ question(location_of_assasination_that_triggered_word_war_I):- not(asked(locatio
                                                                disprove(is_part_of_G7),
                                                                optional_verify(have_hosted_the_olympics_(wintergames)),
                                                                population_under_1_million,
+                                                               verify(was_part_of_former_yugoslavia),
                                                                assert(asked(location_of_assasination_that_triggered_word_war_I)).
 
 question(capital_of_the_westernmost_country_of_the_European_mainland):- not(asked(capital_of_the_westernmost_country_of_the_European_mainland)),
@@ -232,6 +240,18 @@ question(capital_of_the_westernmost_country_of_the_European_mainland):- not(aske
                                                                verify(part_of_EU),
                                                                verify(official_currency_is_Euro),
                                                                assert(asked(capital_of_the_westernmost_country_of_the_European_mainland)).
+
+question(offers_free_wifi_in_whole_city_centre):- not(asked(offers_free_wifi_in_whole_city_centre)),
+                                                  disprove(is_part_of_scandinavia),
+                                                  disprove(have_hosted_the_olympics_(summergames)),
+                                                  disprove(have_hosted_the_olympics_(wintergames)),
+                                                  disprove(capital_of_a_baltic_country),
+                                                  disprove(was_part_of_the_soviet_union),
+                                                  disprove(is_part_of_G7),
+                                                  disprove(official_currency_is_Euro),
+                                                  verify(part_of_EU),
+                                                  verify(was_part_of_former_yugoslavia),
+                                                               assert(asked(offers_free_wifi_in_whole_city_centre)).
 
 
 

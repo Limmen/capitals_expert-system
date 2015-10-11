@@ -199,6 +199,7 @@ sarajevo :- disprove(is_part_of_scandinavia),
             disprove(is_part_of_G7),
             optional_verify(have_hosted_the_olympics_(wintergames)),
             population_under_1_million,
+            verify(was_part_of_former_yugoslavia),
             verify(location_of_assasination_that_triggered_word_war_I).
 
 lisbon :- disprove(is_part_of_scandinavia),
@@ -210,6 +211,18 @@ lisbon :- disprove(is_part_of_scandinavia),
           verify(part_of_EU),
           verify(official_currency_is_Euro),
           verify(capital_of_the_westernmost_country_of_the_European_mainland).
+
+
+zagreb :- disprove(is_part_of_scandinavia),
+          disprove(have_hosted_the_olympics_(summergames)),
+          disprove(have_hosted_the_olympics_(wintergames)),
+          disprove(capital_of_a_baltic_country),
+          disprove(was_part_of_the_soviet_union),
+          disprove(is_part_of_G7),
+          disprove(official_currency_is_Euro),
+          verify(part_of_EU),
+          verify(was_part_of_former_yugoslavia),
+          verify(offers_free_wifi_in_whole_city_centre).
 
 
 
